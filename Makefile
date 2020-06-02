@@ -6,7 +6,7 @@ LIBS=-lbliss -lpthread
 SOURCE=$(shell ls src/core/*.cpp src/struct/*.cpp src/utility/*.cpp)
 OBJECTS=$(SOURCE:.cpp=.o)
 
-TARGETS=bin/clique_find bin/triangle_count bin/motif_count bin/trans_closure bin/fsm bin/pagerank bin/cc
+TARGETS=bin/clique_find bin/triangle_count bin/motif_count bin/trans_closure bin/fsm bin/pagerank bin/cc bin/sssp
 #TARGETS=bin/clique_find bin/triangle_count bin/motif_count bin/trans_closure bin/pagerank bin/fsm bin/pr_cf bin/cc
 
 all: bliss $(SOURCES) $(TARGETS)
@@ -34,6 +34,9 @@ bin/fsm: src/apps/fsm.cpp $(OBJECTS)
 
 bin/cc: src/apps/cc.cpp $(OBJECTS)
 	$(CXX) $(CFLAGS) -o $@ src/apps/cc.cpp $(OBJECTS) $(LIBS)
+
+bin/sssp: src/apps/sssp.cpp $(OBJECTS)
+	$(CXX) $(CFLAGS) -o $@ src/apps/sssp.cpp $(OBJECTS) $(LIBS)
 
 bin/clique_find: src/apps/cliquefinding_simple.cpp $(OBJECTS)
 	$(CXX) $(CFLAGS) -o $@ src/apps/cliquefinding_simple.cpp $(OBJECTS) $(LIBS)
