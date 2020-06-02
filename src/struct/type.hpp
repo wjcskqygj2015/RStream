@@ -27,8 +27,8 @@ typedef float Weight;
 typedef unsigned char BYTE;
 
 enum class FORMAT {
-	EdgeList,
-	AdjList
+	EdgeList = 0,
+	AdjList = 1
 };
 
 enum class EdgeType {

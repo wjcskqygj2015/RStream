@@ -46,7 +46,12 @@ void apply_one_update(Update_CC *update, Vertex_CC *dst_vertex) {
 }
 
 int main(int argc, char **argv) {
-    Engine e(std::string(argv[1]), atoi(argv[2]), atoi(argv[3]));
+    std::string input_file_name = std::string(argv[1]);
+    int number_of_partitions = atoi(argv[2]);
+    int input_format = atoi(argv[3]);
+    int number_of_threads = atoi(argv[4]);
+    int number_of_iterations = atoi(argv[5]);
+    Engine e(input_file_name, number_of_partitions, input_format, number_of_threads);
 
     // get running time (wall time)
     auto start = std::chrono::high_resolution_clock::now();
@@ -54,7 +59,7 @@ int main(int argc, char **argv) {
     std::cout << "--------------------Init Vertex--------------------" << std::endl;
     e.init_vertex<Vertex_CC>(init);
 
-    int num_iters = 2;
+    int num_iters = number_of_iterations;
     for (int i = 0; i < num_iters; i++) {
         std::cout << "--------------------Iteration " << i << "--------------------" << std::endl;
         Scatter<Vertex_CC, Update_CC> scatter_phase(e);
