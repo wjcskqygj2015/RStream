@@ -18,9 +18,9 @@ namespace RStream {
 		unsigned Engine::tuple_long = 0;
 		unsigned Engine::tuple_filter = 0;
 
-		Engine::Engine(std::string _filename, int num_parts, int input_format) : filename(_filename) {
+		Engine::Engine(std::string _filename, int num_parts, int input_format, int number_of_threads) : filename(_filename) {
 //			num_threads = std::thread::hardware_concurrency();
-			num_threads = 64;
+			num_threads = number_of_threads;
 			num_write_threads = 1;
 			num_exec_threads = num_threads;
 
