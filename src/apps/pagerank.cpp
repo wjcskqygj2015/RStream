@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
 
     std::cout << "--------------------Init Vertex--------------------" << std::endl;
     e.init_vertex<Vertex_PR>(init);
-    std::cout << "--------------------Compute Degre--------------------" << std::endl;
+    std::cout << "--------------------Compute Degree--------------------" << std::endl;
     e.compute_degree<Vertex_PR>();
 
     int num_iters = number_of_iterations;
