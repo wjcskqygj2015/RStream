@@ -1,0 +1,1 @@
+./cc ~/data/web-orkut.txt 64 0 64
