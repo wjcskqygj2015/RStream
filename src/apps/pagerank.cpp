@@ -61,7 +61,12 @@ void apply_one_update(Update_PR *update, Vertex_PR *dst_vertex) {
 
 int main(int argc, char **argv) {
 //		Engine e("/home/icuzzq/Workspace/git/RStream/input/input_new.txt", 3, 6);
-    Engine e(std::string(argv[1]), atoi(argv[2]), atoi(argv[3]));
+    std::string input_file_name = std::string(argv[1]);
+    int number_of_partitions = atoi(argv[2]);
+    int input_format = atoi(argv[3]);
+    int number_of_threads = atoi(argv[4]);
+    int number_of_iterations = atoi(argv[5]);
+    Engine e(input_file_name, number_of_partitions, input_format, number_of_threads);
 
     // get running time (wall time)
     auto start = std::chrono::high_resolution_clock::now();
@@ -71,7 +76,7 @@ int main(int argc, char **argv) {
     std::cout << "--------------------Compute Degre--------------------" << std::endl;
     e.compute_degree<Vertex_PR>();
 
-    int num_iters = 4;
+    int num_iters = number_of_iterations;
 
     Scatter<Vertex_PR, Update_PR> scatter_phase(e);
     Gather<Vertex_PR, Update_PR> gather_phase(e);
