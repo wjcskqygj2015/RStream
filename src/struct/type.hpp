@@ -139,8 +139,14 @@ struct BaseUpdate {
 	BaseUpdate(){};
 	BaseUpdate(VertexId _target) : target(_target) {};
 
+	const static VertexId INVALID_VERTEX_ID = -1;
+
 	std::string toString(){
 		return std::to_string(target);
+	}
+
+	bool is_valid() {
+	    return target != INVALID_VERTEX_ID;
 	}
 
 };

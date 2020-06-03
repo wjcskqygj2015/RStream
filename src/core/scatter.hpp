@@ -255,11 +255,15 @@ namespace RStream {
 
 						UpdateType * update_info = generate_one_update(e, src_vertex);
 	//					std::cout << update_info->target << std::endl;
-
-						// insert into shuffle buffer accordingly
-						int index = meta_info::get_index(update_info->target, context);
-						global_buffer<UpdateType>* global_buf = buffer_manager<UpdateType>::get_global_buffer(buffers_for_shuffle, context.num_partitions, index);
-						global_buf->insert(update_info, index);
+                        if (update_info->is_valid()) {
+                            // insert into shuffle buffer accordingly
+                            int index = meta_info::get_index(update_info->target, context);
+                            global_buffer<UpdateType> *global_buf = buffer_manager<UpdateType>::get_global_buffer(
+                                buffers_for_shuffle,
+                                context.num_partitions,
+                                index);
+                            global_buf->insert(update_info, index);
+                        }
 
 						delete update_info;
 					}
