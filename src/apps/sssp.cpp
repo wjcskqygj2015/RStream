@@ -88,5 +88,5 @@ int main(int argc, char **argv) {
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = end - start;
-    std::cout << "Finish cc. Running time : " << diff.count() << " s\n";
+    std::cout << "Finish sssp. Running time : " << diff.count() << " s\n";
 }
