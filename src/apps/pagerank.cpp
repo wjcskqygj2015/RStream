@@ -36,16 +36,18 @@ struct Vertex_PR : BaseVertex {
 //	return strm;
 //}
 
+static double NUMBER_OF_VERTEXES = 0;
+
 void init(char *data, VertexId id) {
     struct Vertex_PR *v = (struct Vertex_PR *) data;
     v->degree = 0;
     v->sum = 0;
-    v->rank = 1.0f;
+    v->rank = 0.15f / NUMBER_OF_VERTEXES;
     v->id = id;
 }
 
 Update_PR *generate_one_update_init(Edge *e, Vertex_PR *v) {
-    Update_PR *update = new Update_PR(e->target, 1.0f / v->degree);
+    Update_PR *update = new Update_PR(e->target, (0.15f / NUMBER_OF_VERTEXES) / v->degree);
     return update;
 }
 
@@ -56,7 +58,7 @@ Update_PR *generate_one_update(Edge *e, Vertex_PR *v) {
 
 void apply_one_update(Update_PR *update, Vertex_PR *dst_vertex) {
     dst_vertex->sum += update->rank;
-    dst_vertex->rank = 0.15 + 0.85 * dst_vertex->sum;
+    dst_vertex->rank = (0.15 / NUMBER_OF_VERTEXES) + 0.85 * dst_vertex->sum;
 }
 
 int main(int argc, char **argv) {
@@ -66,6 +68,8 @@ int main(int argc, char **argv) {
     int input_format = atoi(argv[3]);
     int number_of_threads = atoi(argv[4]);
     int number_of_iterations = atoi(argv[5]);
+    int number_of_vertexes = atoi(argv[6]);
+    NUMBER_OF_VERTEXES = number_of_vertexes;
     Engine e(input_file_name, number_of_partitions, input_format, number_of_threads);
 
     // get running time (wall time)
